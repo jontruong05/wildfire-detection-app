@@ -16,7 +16,21 @@ const HomePage = () => {
     };
 
     return (
-        <h1 className='bg-green'>Real-Time Wildfire Detection App</h1>
+        <body className="min-h-screen text-center bg-no-repeat bg-center bg-cover w-full" style={{ backgroundImage: `url(${WildfireBG})` }}>
+            <title>
+                Real-Time Wildfire Detection App
+            </title>
+            <h1 className="relative top-[15vh] left-[25vl] text-[10vh] text-white font-zilla-slab">
+                Real-Time Wildfire Detection App
+            </h1>
+            <button className="relative top-[20vh] w-[5vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={handleLogin}>
+                Log In
+            </button>
+            <br></br>
+            <button className="relative top-[25vh] w-[5vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={handleSignup}>
+                Sign Up
+            </button>
+        </body>
     );
 };
 

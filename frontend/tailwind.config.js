@@ -1,11 +1,14 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
-  theme: {
-    extend: {},
+  mode: 'jit',
+  purge: ['./index.html', './src/**/*.{ts,tsx}'],
+  darkMode: 'class',
+  theme: { 
+    extend: {
+      fontFamily: {
+        'zilla-slab': ['Zilla Slab', 'serif'],
+      },
+    } 
   },
-  variants: {
-    extend: {},
-  },
+  variants: { extend: {} },
   plugins: [],
 }
