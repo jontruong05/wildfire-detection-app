@@ -1,4 +1,3 @@
-import React from 'react';
 import WildfireBG from '../assets/wildfire_img.jpg';
 
 import { Link, useNavigate } from 'react-router-dom';
