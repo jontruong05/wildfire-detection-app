@@ -14,6 +14,18 @@ const HomePage = () => {
         navigate('/signup');
     };
 
+    // const handleFireDetection = () => {
+    //     navigate('/firedetection');
+    // };
+
+    // const handleUploadImages = () => {
+    //     navigate('/uploadimages');
+    // };
+
+    // const handleViewHistory = () => {
+    //     navigate('/viewhistory');
+    // };
+
     return (
         <body className="min-h-screen text-center bg-no-repeat bg-center bg-cover w-full" style={{ backgroundImage: `url(${WildfireBG})` }}>
             <title>
@@ -29,6 +41,15 @@ const HomePage = () => {
             <button className="relative top-[25vh] w-[5vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={handleSignup}>
                 Sign Up
             </button>
+            {/* <button className="relative top-[25vh] w-[5vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={handleFireDetection}>
+                Test Fire Detection
+            </button>
+            <button className="relative top-[25vh] w-[5vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={handleUploadImages}>
+                Test Imgs
+            </button>
+            <button className="relative top-[25vh] w-[5vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={handleViewHistory}>
+                Test History
+            </button> */}
         </body>
     );
 };
