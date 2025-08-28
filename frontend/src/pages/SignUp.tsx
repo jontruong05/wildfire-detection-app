@@ -1,7 +1,60 @@
 import SatelliteImg from '../assets/satellite.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../firebaseConfig';
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const SignUp = () => {
+
+    const navigate = useNavigate();
+
+    const handleEmailSignUp = () => {
+        const email = (document.getElementById('email') as HTMLInputElement).value;
+        const password = (document.getElementById('password') as HTMLInputElement).value;
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                console.log('Sign up successful!');
+                alert('Sign up successful! You are now directed to the home page.');
+                navigate('/');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+                console.log(errorCode, errorMessage);
+                console.log('Sign up failed.');
+            });
+    }
+
+    const handleGoogleSignUp = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                console.log(user);
+                console.log('Google sign in successful!');
+                alert('Sign in successful! You are now directed to the home page.');
+                navigate('/');
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                alert('Google sign in failed. Please try again.');
+                console.log(errorCode, errorMessage, email, credential);
+                console.log('Google sign in failed.');
+            });
+    }
+
     return (
         <div className='flex flex-row'>
             <title>
@@ -26,13 +79,15 @@ const SignUp = () => {
                     </div>
                     <div className="relative left-[0.5vw] top-[6vh]">
                         <p className="relative text-[2vh] font-zilla-slab">Email</p>
-                        <input type='text' placeholder='Your Email' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
+                        <input id='email' type='text' placeholder='Your Email' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
                     </div>
                     <div className="relative left-[0.5vw] top-[8.5vh]">
                         <p className="relative text-[2vh] font-zilla-slab">Password</p>
-                        <input type='text' placeholder='Your Password' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
+                        <input id='password' type='text' placeholder='Your Password' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
                     </div>
-                    <button className="relative left-[2.5vw] top-[12vh] w-[20vw] h-[5vh] text-[2vh] text-white text-center bg-black font-zilla-slab rounded-lg">
+                    <button 
+                    className="relative left-[2.5vw] top-[12vh] w-[20vw] h-[5vh] text-[2vh] text-white text-center bg-black font-zilla-slab rounded-lg"
+                    onClick={handleEmailSignUp}>
                         Sign Up
                     </button>
                 </div>
@@ -48,6 +103,7 @@ const SignUp = () => {
                         disabled:[&_.g-icon]:opacity-40
                         left-[21vw] top-[13vh]"
                 aria-label="Sign in with Google"
+                onClick={handleGoogleSignUp}
                 >
                     <span
                         className="pointer-events-none absolute inset-0 bg-[#303030] opacity-0 transition-opacity duration-200 ease-in-out

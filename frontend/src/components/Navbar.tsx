@@ -44,9 +44,7 @@ const Navbar = () => {
                 <p className='relative text-[1vw] font-zilla-slab left-[18vw]'>
                     Welcome, [name]!
                 </p>
-                <Link to='/profile'>
-                    <img src={ProfileLight} alt="Profile" className='relative w-[2vw] h-[2vw] left-[9vw]' />
-                </Link>
+                <img src={ProfileLight} alt="Profile" className='relative w-[2vw] h-[2vw] left-[9vw]' />
                 <Link to='/settings'>
                     <img src={SettingsLight} alt="Settings" className='relative w-[2vw] h-[2vw]' />
                 </Link>
