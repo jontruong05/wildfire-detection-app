@@ -2,11 +2,15 @@ import HomeLight from '../assets/icons/home_light.png';
 import ProfileLight from '../assets/icons/profile_light.png';
 import SettingsLight from '../assets/icons/settings_light.png';
 
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { auth } from '../firebaseConfig';
+import { signOut, onAuthStateChanged } from "firebase/auth";
 
 const Navbar = () => {
     
     const location = useLocation();
+    const navigate = useNavigate();
 
     var detection = false;
     var upload = false;
@@ -19,6 +23,37 @@ const Navbar = () => {
     } else if (location.pathname === ('/viewhistory')) {
         history = true;
     }
+    
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const Logout = () => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log("Sign-out successful.");
+            alert("You have been logged out.")
+        }).catch((error) => {
+            // An error happened.
+            alert("Error signing out: " + error.message);
+            console.error("Error signing out: ", error);
+        });
+        navigate('/');
+        window.location.reload();
+    }
 
     return (
         <div className='w-full h-[8vh]'>
@@ -27,27 +62,43 @@ const Navbar = () => {
                     <img src={HomeLight} alt="Home" className='w-[2vw] h-[2vw]' />
                 </Link>
                 <Link to='/firedetection'>
-                    <p className={`relative text-[1vw] font-zilla-slab left-[-8vw] bg-${detection ? 'white' : 'gray-800'}` + ` text-${detection ? 'black' : 'white'} rounded-md px-2`}>
+                    <p className={`relative text-[1vw] font-zilla-slab left-[-10vw] bg-${detection ? 'white' : 'gray-800'}` + ` text-${detection ? 'black' : 'white'} rounded-md px-2 hover:bg-white hover:text-black`}>
                         Real-Time Detection
                     </p>
                 </Link>
                 <Link to='/uploadimages'>
-                    <p className={`relative text-[1vw] font-zilla-slab left-[-17vw] bg-${upload ? 'white' : 'gray-800'}` + ` text-${upload ? 'black' : 'white'} rounded-md px-2`}>
+                    <p className={`relative text-[1vw] font-zilla-slab left-[-21vw] bg-${upload ? 'white' : 'gray-800'}` + ` text-${upload ? 'black' : 'white'} rounded-md px-2 hover:bg-white hover:text-black`}>
                         Upload Images
                     </p>
                 </Link>
                 <Link to='/viewhistory'>
-                    <p className={`relative text-[1vw] font-zilla-slab left-[-26vw] bg-${history ? 'white' : 'gray-800'}` + ` text-${history ? 'black' : 'white'} rounded-md px-2`}>
+                    <p className={`relative text-[1vw] font-zilla-slab left-[-32vw] bg-${history ? 'white' : 'gray-800'}` + ` text-${history ? 'black' : 'white'} rounded-md px-2 hover:bg-white hover:text-black`}>
                         View History
                     </p>
                 </Link>
-                <p className='relative text-[1vw] font-zilla-slab left-[18vw]'>
+                <p className='relative text-[1vw] font-zilla-slab left-[11vw]'>
                     Welcome, [name]!
                 </p>
-                <img src={ProfileLight} alt="Profile" className='relative w-[2vw] h-[2vw] left-[9vw]' />
-                <Link to='/settings'>
-                    <img src={SettingsLight} alt="Settings" className='relative w-[2vw] h-[2vw]' />
-                </Link>
+
+                <div className="relative" ref={dropdownRef}>
+                    <img src={ProfileLight} alt="Profile" className="relative w-[2vw] h-[2vw]  cursor-pointer" onClick={() => setIsDropdownOpen((prev) => !prev)} />
+
+                    {isDropdownOpen && (
+                        <div className="absolute right-[0vw] top-[6vh] mt-2 w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-20 font-zilla-slab">
+                            <div className="py-1">
+                                <Link to="/profile" className="block text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    Profile
+                                </Link>
+                                <Link to="/settings" className="block text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    Settings
+                                </Link>
+                                <button onClick={Logout} className="w-full block text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </nav>
         </div>
     );

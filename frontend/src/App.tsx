@@ -7,7 +7,6 @@ import ForgotPassword from './pages/ForgotPassword';
 import FireDetection from './pages/FireDetection';
 import UploadImages from './pages/UploadImages';
 import ViewHistory from './pages/ViewHistory';
-import Navbar from './components/Navbar';
 
 import './App.css';
 
@@ -16,7 +15,6 @@ function App() {
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          {/* <Route path='/' element={<HomePage />} /> */}
           <Route path='/firedetection' element={<FireDetection />} />
           <Route path='/uploadimages' element={<UploadImages />} />
           <Route path='/viewhistory' element={<ViewHistory />} />

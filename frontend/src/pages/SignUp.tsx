@@ -83,7 +83,7 @@ const SignUp = () => {
                     </div>
                     <div className="relative left-[0.5vw] top-[8.5vh]">
                         <p className="relative text-[2vh] font-zilla-slab">Password</p>
-                        <input id='password' type='text' placeholder='Your Password' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
+                        <input id='password' type='password' placeholder='Your Password' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
                     </div>
                     <button 
                     className="relative left-[2.5vw] top-[12vh] w-[20vw] h-[5vh] text-[2vh] text-white text-center bg-black font-zilla-slab rounded-lg"
