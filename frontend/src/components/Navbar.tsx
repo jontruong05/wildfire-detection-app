@@ -1,11 +1,11 @@
 import HomeLight from '../assets/icons/home_light.png';
 import ProfileLight from '../assets/icons/profile_light.png';
-import SettingsLight from '../assets/icons/settings_light.png';
 
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { auth } from '../firebaseConfig';
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth, db } from '../firebaseConfig';
+import { signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 const Navbar = () => {
     
@@ -39,6 +39,30 @@ const Navbar = () => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
+    }, []);
+
+    const [firstName, setFirstName] = useState<string>("");
+
+    useEffect(() => {
+        const fetchFirstName = async () => {
+            const user = auth.currentUser;
+            if (!user) return;
+            if (user.displayName) {
+                setFirstName(user.displayName.split(" ")[0] || "");
+            } 
+            else {
+                const docRef = doc(db, "users", user.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    setFirstName(docSnap.data().firstName);
+                } 
+                else {
+                    console.log("No such document!");
+                }
+            }
+        };
+        fetchFirstName();
     }, []);
 
     const Logout = () => {
@@ -77,7 +101,7 @@ const Navbar = () => {
                     </p>
                 </Link>
                 <p className='relative text-[1vw] font-zilla-slab left-[11vw]'>
-                    Welcome, [name]!
+                    Welcome, {firstName}!
                 </p>
 
                 <div className="relative" ref={dropdownRef}>

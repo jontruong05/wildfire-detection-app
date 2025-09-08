@@ -1,31 +1,54 @@
 import SatelliteImg from '../assets/satellite.jpg';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../firebaseConfig';
+import { auth, db } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 const SignUp = () => {
 
     const navigate = useNavigate();
 
-    const handleEmailSignUp = () => {
+    const handleEmailSignUp = async () => {
+        const firstName = (document.getElementById('first-name') as HTMLInputElement).value;
+        const lastName = (document.getElementById('last-name') as HTMLInputElement).value;
         const email = (document.getElementById('email') as HTMLInputElement).value;
         const password = (document.getElementById('password') as HTMLInputElement).value;
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user);
-                console.log('Sign up successful!');
-                alert('Sign up successful! You are now directed to the home page.');
-                navigate('/');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
-                console.log(errorCode, errorMessage);
-                console.log('Sign up failed.');
+        
+        try {
+            const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
+            await setDoc(doc(db, 'users', user.uid), {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                uid: user.uid
             });
+
+            console.log("User profile data saved to Firestore!");
+            alert('Sign up successful! You are now directed to the home page.');
+            navigate('/');
+        }
+        catch (error) {
+            console.error("Error writing user profile data to Firestore:", error);
+            if (typeof error === 'object' && error !== null && 'code' in error) {
+                const err = error as { code: string };
+                switch (err.code) {
+                    case 'auth/email-already-in-use':
+                        alert('The email address is already in use by another account.');
+                        break;
+                    case 'auth/invalid-email':
+                        alert('The email address is not in a valid format.');
+                        break;
+                    case 'auth/password-does-not-meet-requirements':
+                        alert('Password must be at least 6 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.');
+                        break;
+                    default:
+                        alert('Sign up failed. Please try again.');
+                }
+            } else {
+                alert('Sign up failed. Please try again.');
+            }
+        }
     }
 
     const handleGoogleSignUp = () => {
@@ -71,11 +94,11 @@ const SignUp = () => {
                 <div className="relative left-[11.5vw] top-[10vh] border border-[#747775] bg-white rounded-lg p-4 w-[26.5vw] h-[43.5vh]">
                     <div className="relative left-[0.5vw] top-[1vh]">
                         <p className="relative text-[2vh] font-zilla-slab">First Name</p>
-                        <input type='text' placeholder='Your First Name' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
+                        <input id='first-name' type='text' placeholder='Your First Name' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
                     </div>
                     <div className="relative left-[0.5vw] top-[3.5vh]">
                         <p className="relative text-[2vh] font-zilla-slab">Last Name</p>
-                        <input type='text' placeholder='Your Last Name' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
+                        <input id='last-name' type='text' placeholder='Your Last Name' className='relative top-[1.1vh] border border-[#747775] rounded-md p-1 font-zilla-slab w-[24vw]'></input>
                     </div>
                     <div className="relative left-[0.5vw] top-[6vh]">
                         <p className="relative text-[2vh] font-zilla-slab">Email</p>

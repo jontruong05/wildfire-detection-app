@@ -22,9 +22,17 @@ const Login = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                alert('Sign in failed. Either the email or password is incorrect, or the user does not exist.');
+                switch (errorCode) {
+                    case 'auth/invalid-email':
+                        alert('The email address entered is invalid.');
+                        break;
+                    case 'auth/invalid-credential':
+                        alert('The password entered is incorrect.');
+                        break;
+                    default:
+                        alert('Something went wrong. Please try again.');
+                }
                 console.log(errorCode, errorMessage);
-                console.log('Sign in failed.');
             });
     }
 
