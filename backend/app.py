@@ -70,7 +70,7 @@ def upload_images():
                                       img_name=file_name,
                                       model=model_choice,
                                       prediction=prediction,
-                                      upload_time=datetime.now())
+                                      upload_time=datetime.now().replace(microsecond=0))
     db.session.add(prediction_entry)
     db.session.commit()
     return jsonify({
@@ -80,7 +80,6 @@ def upload_images():
 @app.route('/viewhistory', methods=['GET', 'DELETE'])
 def view_history():
     if request.method == 'GET':
-        # Send current user's uid from frontend when request method is GET (request.form.get)
         uid = request.args.get('uid')
         query_result = (db.session.query(
             ImgPredictions.img_name,
@@ -103,16 +102,22 @@ def view_history():
             for row in query_result
         ]
 
-        return query_result# jsonify([p.to_dict() for p in query_result])
+        return query_result
     elif request.method == 'DELETE':
-        # Send current user's uid, the image name, the prediction, and the upload time when request is DELETE (request.form.get)
         uid = request.form.get('uid')
         img_name = request.form.get('img_name')
+        model = request.form.get('model')
         prediction = request.form.get('prediction')
-        upload_time = request.form.get('upload_time')
-        db.session.execute(db.delete(ImgPredictions).where((ImgPredictions.uid == uid) and
-                                                           (ImgPredictions.img_name == img_name) and
-                                                           (ImgPredictions.prediction == prediction) and
+        upload_time = datetime.strptime(request.form.get('upload_time'), "%Y-%m-%d %H:%M:%S")
+        # print(uid)
+        # print(img_name)
+        # print(model)
+        # print(prediction)
+        # print(upload_time)
+        db.session.execute(db.delete(ImgPredictions).where((ImgPredictions.uid == uid) &
+                                                           (ImgPredictions.img_name == img_name) &
+                                                           (ImgPredictions.model == model) &
+                                                           (ImgPredictions.prediction == prediction) &
                                                            (ImgPredictions.upload_time == upload_time)))
         db.session.commit()
         return "Deleted an entry from the database."

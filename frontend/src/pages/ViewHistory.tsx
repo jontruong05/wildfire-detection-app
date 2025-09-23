@@ -32,8 +32,25 @@ const ViewHistory = () => {
 
     for (let p of predictions) {
         p.upload_time = p.upload_time.replace('T', ' ');
-        p.upload_time = p.upload_time.substring(0, 19);
     }
+
+    const handleDelete = async (p: Prediction) => {
+        const formData = new FormData();
+        formData.append('uid', uid);
+        formData.append('img_name', p.img_name);
+        formData.append('model', p.model);
+        formData.append('prediction', p.prediction);
+        formData.append('upload_time', p.upload_time);
+
+        const response = await fetch('http://localhost:5000/viewhistory', {
+            method: 'DELETE',
+            body: formData
+        });
+
+        const result = await response;
+        console.log(result);
+        window.location.reload();
+    };
 
     return (
         <body className='min-h-screen text-center bg-center bg-cover w-full' style={{ backgroundImage: `url(${ForestViewHistory})` }}>
@@ -58,10 +75,9 @@ const ViewHistory = () => {
                                 <td className='border-2 border-black'>{p.upload_time}</td>
                                 <td className='border-2 border-black'>{p.model}</td>
                                 <td className='border-2 border-black'>{p.prediction}</td>
+                                <th onClick={() => handleDelete(p)}>🗑</th>
                             </tr>
-                        ))
-
-                        }
+                        ))}
                     </tbody>
                 </table>
             </div>
