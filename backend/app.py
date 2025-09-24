@@ -11,9 +11,9 @@ from pathlib import Path
 from PIL import Image
 from datetime import datetime
 
-if os.environ.get("RUN_INIT_ON_STARTUP", "false").lower() == "true":
-    from init_db import initialize_db
-    initialize_db()
+# if os.environ.get("RUN_INIT_ON_STARTUP", "false").lower() == "true":
+#     from init_db import initialize_db
+#     initialize_db()
 
 # Import prediction functions
 from prediction_model.lite_model import lite_predict
