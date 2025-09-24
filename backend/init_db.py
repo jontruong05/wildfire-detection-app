@@ -1,5 +1,12 @@
-from app import db, app
+# from app import db, app
 
-with app.app_context():
-    db.create_all()
-    print("Database initialized!")
+# with app.app_context():
+#     db.create_all()
+#     print("Database initialized!")
+
+def initialize_db():
+    from app import db, app
+
+    with app.app_context():
+        db.create_all()
+        print("Database initialized!")
