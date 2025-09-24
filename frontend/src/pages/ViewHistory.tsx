@@ -24,7 +24,7 @@ const ViewHistory = () => {
 
     const [predictions, setPredictions] = useState<Prediction[]>([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/viewhistory?uid=${uid}`)
+        fetch(`${import.meta.env.VITE_API_URL}/viewhistory?uid=${uid}`)// fetch(`http://localhost:5000/viewhistory?uid=${uid}`)
         .then(res => res.json())
         .then(data => setPredictions(data))
         .catch(err => console.error("Error fetching predictions:", err));
@@ -42,7 +42,7 @@ const ViewHistory = () => {
         formData.append('prediction', p.prediction);
         formData.append('upload_time', p.upload_time);
 
-        const response = await fetch('http://localhost:5000/viewhistory', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/viewhistory`, { // await fetch('http://localhost:5000/viewhistory', {
             method: 'DELETE',
             body: formData
         });
