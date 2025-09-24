@@ -45,7 +45,7 @@ const UploadImages = () => {
         }
         formData.append('img_name', imgName);
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/uploadimages`, {// fetch('http://localhost:5000/uploadimages', {
+        const response = await fetch('https://wildfire-backend-4muo.onrender.com/uploadimages', {// fetch('http://localhost:5000/uploadimages', {
             method: 'POST',
             body: formData
         });
