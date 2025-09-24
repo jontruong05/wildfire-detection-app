@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8c700caa.css",
+    "main.js": "/static/js/main.7ca6a942.js",
+    "static/js/453.834c6d4d.chunk.js": "/static/js/453.834c6d4d.chunk.js",
+    "static/media/wildfire_img.jpg": "/static/media/wildfire_img.f48cd5f64dd5edd035ae.jpg",
+    "static/media/satellite_wildfire.jpg": "/static/media/satellite_wildfire.62b133cc68d7924143da.jpg",
+    "static/media/forest_upload_imgs.jpg": "/static/media/forest_upload_imgs.63bb82de94bf5401ce0b.jpg",
+    "static/media/satellite.jpg": "/static/media/satellite.465b708fa1c796cd4ab6.jpg",
+    "static/media/forest_view_history.jpg": "/static/media/forest_view_history.de3de7b33fd8036c7e45.jpg",
+    "static/media/zilla-slab-latin-400-normal.woff2": "/static/media/zilla-slab-latin-400-normal.bfc87e8a8c3518361d70.woff2",
+    "static/media/zilla-slab-latin-700-normal.woff2": "/static/media/zilla-slab-latin-700-normal.a5380236c11851b62c95.woff2",
+    "static/media/zilla-slab-highlight-latin-400-normal.woff2": "/static/media/zilla-slab-highlight-latin-400-normal.ae47f6c36cb6daad322e.woff2",
+    "static/media/zilla-slab-highlight-latin-700-normal.woff2": "/static/media/zilla-slab-highlight-latin-700-normal.b0df31d738a0be4c03f7.woff2",
+    "static/media/zilla-slab-latin-400-normal.woff": "/static/media/zilla-slab-latin-400-normal.878032032c122c7bc33f.woff",
+    "static/media/zilla-slab-latin-700-normal.woff": "/static/media/zilla-slab-latin-700-normal.4486db462702615d1913.woff",
+    "static/media/zilla-slab-highlight-latin-ext-400-normal.woff2": "/static/media/zilla-slab-highlight-latin-ext-400-normal.8a9ba75871921ac29859.woff2",
+    "static/media/zilla-slab-highlight-latin-ext-700-normal.woff2": "/static/media/zilla-slab-highlight-latin-ext-700-normal.8c61a9ab610fbabdee42.woff2",
+    "static/media/zilla-slab-highlight-latin-400-normal.woff": "/static/media/zilla-slab-highlight-latin-400-normal.e7fb5fb32d9b5f140322.woff",
+    "static/media/zilla-slab-latin-ext-700-normal.woff2": "/static/media/zilla-slab-latin-ext-700-normal.27a85875071b11cd8c2c.woff2",
+    "static/media/zilla-slab-latin-ext-400-normal.woff2": "/static/media/zilla-slab-latin-ext-400-normal.7d4a287f63070565e8b4.woff2",
+    "static/media/zilla-slab-highlight-latin-700-normal.woff": "/static/media/zilla-slab-highlight-latin-700-normal.674c9ef8bc193376c32e.woff",
+    "static/media/zilla-slab-latin-ext-400-normal.woff": "/static/media/zilla-slab-latin-ext-400-normal.2ef901a98c9c7bc5af2a.woff",
+    "static/media/zilla-slab-latin-ext-700-normal.woff": "/static/media/zilla-slab-latin-ext-700-normal.634b5acf86d005b4796b.woff",
+    "static/media/zilla-slab-highlight-latin-ext-400-normal.woff": "/static/media/zilla-slab-highlight-latin-ext-400-normal.d554b50f4c657fbc0130.woff",
+    "static/media/zilla-slab-highlight-latin-ext-700-normal.woff": "/static/media/zilla-slab-highlight-latin-ext-700-normal.29a02e5f3d724dc80a26.woff",
+    "index.html": "/index.html",
+    "main.8c700caa.css.map": "/static/css/main.8c700caa.css.map",
+    "main.7ca6a942.js.map": "/static/js/main.7ca6a942.js.map",
+    "453.834c6d4d.chunk.js.map": "/static/js/453.834c6d4d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c700caa.css",
+    "static/js/main.7ca6a942.js"
+  ]
+}
