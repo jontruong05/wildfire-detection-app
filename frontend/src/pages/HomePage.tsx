@@ -27,13 +27,13 @@ const HomePage = () => {
     return (
         <body className="min-h-screen text-center bg-no-repeat bg-center bg-cover w-full" style={{ backgroundImage: `url(${WildfireBG})` }}>
             <title>
-                Real-Time Wildfire Detection App
+                Wildfire Detection App
             </title>
 
             {/* Logged out */}
             <section id='logged-out-view' className={loggedIn ? 'hidden' : 'block'}>
                 <h1 className="relative top-[15vh] left-[25vl] text-[10vh] text-white font-zilla-slab">
-                    Real-Time Wildfire Detection App
+                    Wildfire Detection App
                 </h1>
                 <button className="relative top-[20vh] w-[5vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={() => navigate('/login')}>
                     Log In
@@ -48,7 +48,7 @@ const HomePage = () => {
             <section id='logged-in-view' className={loggedIn ? 'block' : 'hidden'}>
                 <Navbar />
                 <h1 className="relative top-[7vh] left-[25vl] text-[10vh] text-white font-zilla-slab">
-                    Real-Time Wildfire Detection App
+                    Wildfire Detection App
                 </h1>
                 <button className="relative top-[12vh] w-[10vw] h-[5vh] text-[2vh] bg-white font-zilla-slab rounded-lg" onClick={() => navigate('/firedetection')}>
                     Real-Time Detection
