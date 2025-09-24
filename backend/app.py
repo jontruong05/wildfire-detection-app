@@ -3,7 +3,7 @@
 # Flask, SQLAlchemy, and dotenv imports
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
+from database import db
 from sqlalchemy import desc
 from dotenv import load_dotenv
 import os
@@ -33,7 +33,7 @@ CORS(app, origins=['http://localhost:3000',
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+db.init_app(app)
 
 # Tables
 class ImgPredictions(db.Model):
