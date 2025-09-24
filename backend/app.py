@@ -20,7 +20,9 @@ env_path = Path(__file__).resolve().parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 app = Flask(__name__)
-CORS(app, origins=['http://localhost:3000'])
+CORS(app, origins=['http://localhost:3000',
+                   'https://main.d1w1fwpk1cpsjr.amplifyapp.com/',
+                   'https://test-dependencies.d1w1fwpk1cpsjr.amplifyapp.com/'])
 
 # Configurations
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://postgres:{os.getenv('POSTGRES_PASSWORD')}@localhost:5432/wildfiredetectionapp"
