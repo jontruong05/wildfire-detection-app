@@ -25,7 +25,8 @@ CORS(app, origins=['http://localhost:3000',
                    'https://test-dependencies.d1w1fwpk1cpsjr.amplifyapp.com'])
 
 # Configurations
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://postgres:{os.getenv('POSTGRES_PASSWORD')}@localhost:5432/wildfiredetectionapp"
+# app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://postgres:{os.getenv('POSTGRES_PASSWORD')}@localhost:5432/wildfiredetectionapp"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
